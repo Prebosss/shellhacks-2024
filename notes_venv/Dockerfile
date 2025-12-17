@@ -12,7 +12,7 @@ WORKDIR /app
 VOLUME ["/app/Vuploads"]
 
 RUN apk add python-${version} py${version}-pip && \
-	chown -R nonroot.nonroot /app/
+    chown -R nonroot:nonroot /app/
 
 # Copy the SSL certificates
 COPY certificate.pem /app/
@@ -37,7 +37,7 @@ COPY static/images /app/static/images/
 COPY static/css/fonts /app/static/css/fonts/
 
 #health check
-HEALTHCHECK CMD curl --fail http://localhost:8080/health || exit 1
+HEALTHCHECK CMD curl --fail http://localhost:5500/health || exit 1
 
 #only install the files needed
 RUN  pip install -r requirements.txt --user
